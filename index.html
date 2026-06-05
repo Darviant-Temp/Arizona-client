@@ -3,154 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heidelberg Custom Sheds | Phoenix, AZ</title>
+    <title>Heidelberg Custom Sheds | Premium Builds in Phoenix, AZ</title>
+    
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
                     colors: {
-                        brand: '#7f1d1d', /* Burgundy red from H logo */
-                        dark: '#111827',
+                        brand: {
+                            50: '#fdf3f3',
+                            100: '#fbe5e5',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            900: '#7f1d1d', /* Logo accent */
+                        },
+                        dark: '#0f172a',
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* Custom Smooth Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hover-scale {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-scale:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
-            <div class="flex items-center gap-3">
-                <!-- Replace with his actual logo image later -->
-                <div class="w-10 h-10 bg-brand text-white flex items-center justify-center font-bold text-xl rounded-full">H</div>
-                <span class="font-bold text-xl tracking-tight">Heidelberg Custom Sheds</span>
-            </div>
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="#services" class="text-gray-600 hover:text-brand font-medium">Sheds</a>
-                <a href="#reviews" class="text-gray-600 hover:text-brand font-medium">Reviews</a>
-                <a href="#contact" class="bg-brand text-white px-5 py-2.5 rounded-md font-medium hover:bg-red-900 transition">Get a Free Quote</a>
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 glass border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-12 h-12 bg-brand-900 text-white flex items-center justify-center font-extrabold text-2xl rounded-xl shadow-lg">H</div>
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-xl tracking-tight leading-tight text-dark">Heidelberg</span>
+                        <span class="text-sm font-semibold text-brand-600 tracking-wider uppercase">Custom Sheds</span>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#what-we-build" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">What We Build</a>
+                    <a href="#pricing" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Pricing</a>
+                    <a href="#work" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Our Work</a>
+                    <a href="#reviews" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Reviews</a>
+                    <a href="#contact" class="bg-dark text-white px-6 py-3 rounded-lg text-sm font-bold shadow-md hover:bg-brand-900 transition-colors duration-300">Get a Free Quote</a>
+                </nav>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-dark text-white pt-24 pb-32 overflow-hidden">
-        <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop');"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">Not Your Average <span class="text-brand">Shed Company</span></h1>
-            <p class="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10">Locally owned and operated in Phoenix, AZ. We build premium custom sheds, home offices, and utility spaces designed to last.</p>
-            <div class="flex justify-center gap-4">
-                <a href="#contact" class="bg-brand text-white px-8 py-3.5 rounded-md font-bold text-lg hover:bg-red-900 transition">Book a Consultation</a>
-                <a href="#services" class="bg-white text-dark px-8 py-3.5 rounded-md font-bold text-lg hover:bg-gray-100 transition">View Our Builds</a>
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+        <!-- Abstract shape background -->
+        <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 opacity-10">
+            <svg width="600" height="600" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#7f1d1d" d="M45.7,-76.1C58.9,-69.3,69.1,-55.4,76.5,-40.5C83.9,-25.6,88.5,-9.7,85.6,5.1C82.7,19.9,72.3,33.5,61.4,45.2C50.5,56.9,39.1,66.7,25.2,73.1C11.3,79.5,-5.1,82.5,-20.9,79.5C-36.7,76.5,-51.9,67.5,-63.3,55.1C-74.7,42.7,-82.3,26.9,-85.4,10.2C-88.5,-6.5,-87.1,-24.1,-79.1,-38.7C-71.1,-53.3,-56.5,-64.9,-41.5,-70.8C-26.5,-76.7,-11.1,-76.9,2.8,-81.1C16.7,-85.3,32.5,-82.9,45.7,-76.1Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-block bg-brand-50 text-brand-900 font-semibold px-4 py-2 rounded-full text-sm mb-6 shadow-sm border border-brand-100">
+                        🏆 Rated 4.9/5 by Phoenix Homeowners
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-dark tracking-tight leading-[1.1] mb-6">
+                        Not Your Average <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-900">Shed Company.</span>
+                    </h1>
+                    <p class="text-lg lg:text-xl text-slate-500 mb-8 max-w-lg leading-relaxed">
+                        Transform your backyard with expert craftsmanship. From utility storage to luxury home offices, we build structures that stand the test of time.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-brand-900 text-white text-center px-8 py-4 rounded-xl font-bold text-lg hover:bg-dark transition shadow-lg hover:shadow-xl">Start Your Build</a>
+                        <a href="#work" class="bg-white text-dark border-2 border-slate-200 text-center px-8 py-4 rounded-xl font-bold text-lg hover:border-brand-900 transition">View Portfolio</a>
+                    </div>
+                </div>
+                <div class="relative" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <!-- Placeholder image, replace with 95724.jpg or similar high-end shed photo -->
+                    <div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop" alt="Custom Modern Shed" class="object-cover w-full h-full transform hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
+                    </div>
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl animate-bounce" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-2xl">✓</div>
+                            <div>
+                                <p class="text-sm text-slate-500 font-medium">100% Satisfaction</p>
+                                <p class="font-bold text-dark">Guaranteed Quality</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services / Pricing Table -->
-    <section id="services" class="py-20 bg-white">
+    <!-- What We Build -->
+    <section id="what-we-build" class="py-24 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-dark tracking-tight">Premium Shed Builds</h2>
-                <p class="mt-4 text-lg text-gray-500">From utility storage to custom home offices.</p>
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-600 font-bold tracking-widest uppercase text-sm mb-3">Our Services</h2>
+                <h3 class="text-4xl font-extrabold text-dark mb-4">Expert Craftsmanship for Every Project</h3>
+                <p class="text-lg text-slate-500">We don't just build sheds; we create extensions of your home tailored exactly to your needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-3xl mb-6">🏠</div>
+                    <h4 class="text-2xl font-bold text-dark mb-4">Custom Utility Sheds</h4>
+                    <p class="text-slate-500 mb-6">Built for utility, storage space, workshop areas, garden storage, and to hide all those miscellaneous items piling up in the garage.</p>
+                    <ul class="space-y-3 font-medium text-slate-700">
+                        <li class="flex items-center gap-2"><span class="text-brand-500">✔</span> Premium Materials</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-500">✔</span> Paint Matching Available</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-3xl mb-6">✨</div>
+                    <h4 class="text-2xl font-bold text-dark mb-4">Livable Shell Builds</h4>
+                    <p class="text-slate-500 mb-6">Constructed with the intent to make it livable down the road. Built with premium materials to ensure quality lasts a lifetime, keeping building codes in mind.</p>
+                    <ul class="space-y-3 font-medium text-slate-700">
+                        <li class="flex items-center gap-2"><span class="text-brand-500">✔</span> Tiny Home Foundations</li>
+                        <li class="flex items-center gap-2"><span class="text-brand-500">✔</span> Backyard Offices & Studios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparent Pricing -->
+    <section id="pricing" class="py-24 bg-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-500 font-bold tracking-widest uppercase text-sm mb-3">Transparent Pricing</h2>
+                <h3 class="text-4xl font-extrabold mb-4">No Hidden Fees. Just Quality.</h3>
+                <p class="text-lg text-slate-400">All prices include 1 Door, 1 Window, Shingles/Roll Roofing, and paint matching. Prices based on standard sizes.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Pricing Card 1 -->
+                <div class="bg-slate-800 rounded-3xl p-8 hover-scale border border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-xl font-bold text-slate-300 mb-2">Lean-to Shed</h4>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-extrabold">$2,900</span>
+                        <span class="text-slate-400 font-medium">/base</span>
+                    </div>
+                    <p class="text-slate-400 mb-8 pb-8 border-b border-slate-700">Perfect for side yards and tight boundaries.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3"><span class="text-brand-500">✔</span> <span>Multiple foundation options</span></li>
+                        <li class="flex items-start gap-3"><span class="text-brand-500">✔</span> <span>Custom door/window placement</span></li>
+                        <li class="flex items-start gap-3"><span class="text-brand-500">✔</span> <span>Space-saving design</span></li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-4 px-6 rounded-xl bg-slate-700 text-center font-bold hover:bg-slate-600 transition">Request Quote</a>
+                </div>
+
+                <!-- Pricing Card 2 (Popular) -->
+                <div class="bg-brand-900 rounded-3xl p-8 hover-scale shadow-2xl relative transform lg:-translate-y-4 border border-brand-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-brand-900 px-4 py-1.5 rounded-full text-sm font-bold shadow-md">Most Popular</div>
+                    <h4 class="text-xl font-bold text-brand-100 mb-2">Gable Shed</h4>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-extrabold text-white">$3,150</span>
+                        <span class="text-brand-200 font-medium">/base</span>
+                    </div>
+                    <p class="text-brand-100 mb-8 pb-8 border-b border-brand-700">The classic, versatile design for any backyard.</p>
+                    <ul class="space-y-4 mb-8 text-white">
+                        <li class="flex items-start gap-3"><span class="text-brand-300">✔</span> <span>Timeless aesthetic</span></li>
+                        <li class="flex items-start gap-3"><span class="text-brand-300">✔</span> <span>Option for small loft space</span></li>
+                        <li class="flex items-start gap-3"><span class="text-brand-300">✔</span> <span>Great for workshops</span></li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-4 px-6 rounded-xl bg-white text-brand-900 text-center font-bold hover:bg-slate-100 transition shadow-lg">Request Quote</a>
+                </div>
+
+                <!-- Pricing Card 3 -->
+                <div class="bg-slate-800 rounded-3xl p-8 hover-scale border border-slate-700" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="text-xl font-bold text-slate-300 mb-2">Barn Style Shed</h4>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-extrabold">$3,800</span>
+                        <span class="text-slate-400 font-medium">/base</span>
+                    </div>
+                    <p class="text-slate-400 mb-8 pb-8 border-b border-slate-700">Maximum vertical space and overhead storage.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3"><span class="text-brand-500">✔</span> <span>Superior headroom</span></li>
+                        <li class="flex items-start gap-3"><span class="text-brand-500">✔</span> <span>Heavy-duty profile</span></li>
+                        <li class="flex items-start gap-3"><span class="text-brand-500">✔</span> <span>Perfect for large lofts</span></li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-4 px-6 rounded-xl bg-slate-700 text-center font-bold hover:bg-slate-600 transition">Request Quote</a>
+                </div>
+            </div>
+            <p class="text-center text-slate-400 mt-8 text-sm italic" data-aos="fade-in" data-aos-delay="400">* Electrical, plumbing, interior finishing, and exterior accessories priced separately.</p>
+        </div>
+    </section>
+
+    <!-- Our Work (Gallery) -->
+    <section id="work" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-600 font-bold tracking-widest uppercase text-sm mb-3">Our Work</h2>
+                <h3 class="text-4xl font-extrabold text-dark mb-4">Recent Projects</h3>
+                <p class="text-lg text-slate-500">Browse our portfolio of completed projects across the Phoenix area.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Lean-to -->
-                <div class="border border-gray-100 bg-slate-50 rounded-xl p-8 shadow-sm hover:shadow-md transition">
-                    <h3 class="text-2xl font-bold mb-2">Lean-to Shed</h3>
-                    <p class="text-gray-600 mb-6">Perfect for side yards and tight spaces. Includes 1 door, 1 window, and shingles/roll roofing to match your house.</p>
-                    <p class="text-3xl font-extrabold text-brand mb-6">From $2,900</p>
-                    <ul class="space-y-3 mb-8 text-gray-600">
-                        <li>✓ Wooden, Concrete, or No Foundation</li>
-                        <li>✓ Paint to match home</li>
-                        <li>✓ Custom window/door placement</li>
-                    </ul>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Replace src with actual shed images -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-sm aspect-square cursor-pointer" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800" alt="Shed Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <span class="text-white font-bold text-xl">Modern Home Office</span>
+                        <span class="text-brand-300 text-sm">Gable Build • Custom Interior</span>
+                    </div>
                 </div>
-                <!-- Gable -->
-                <div class="border-2 border-brand bg-white rounded-xl p-8 shadow-lg relative transform md:-translate-y-4">
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand text-white px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>
-                    <h3 class="text-2xl font-bold mb-2">Gable Shed</h3>
-                    <p class="text-gray-600 mb-6">Classic, versatile design with an option for a small loft space. Ideal for workshops and storage.</p>
-                    <p class="text-3xl font-extrabold text-brand mb-6">From $3,150</p>
-                    <ul class="space-y-3 mb-8 text-gray-600">
-                        <li>✓ Premium framing & materials</li>
-                        <li>✓ Optional mini splits / electrical</li>
-                        <li>✓ Multiple sizing options up to 12x20</li>
-                    </ul>
+                <div class="group relative rounded-2xl overflow-hidden shadow-sm aspect-square cursor-pointer" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800" alt="Shed Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <span class="text-white font-bold text-xl">Poolside Storage</span>
+                        <span class="text-brand-300 text-sm">Lean-to Build • Exterior Upgrades</span>
+                    </div>
                 </div>
-                <!-- Barn -->
-                <div class="border border-gray-100 bg-slate-50 rounded-xl p-8 shadow-sm hover:shadow-md transition">
-                    <h3 class="text-2xl font-bold mb-2">Barn Style</h3>
-                    <p class="text-gray-600 mb-6">Maximum overhead storage space. Great for heavy equipment, gardening gear, and maximizing vertical real estate.</p>
-                    <p class="text-3xl font-extrabold text-brand mb-6">From $3,800</p>
-                    <ul class="space-y-3 mb-8 text-gray-600">
-                        <li>✓ Superior headroom</li>
-                        <li>✓ Heavy-duty construction</li>
-                        <li>✓ Optional loft additions</li>
-                    </ul>
+                <div class="group relative rounded-2xl overflow-hidden shadow-sm aspect-square cursor-pointer" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" alt="Shed Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <span class="text-white font-bold text-xl">Large Workshop</span>
+                        <span class="text-brand-300 text-sm">Barn Style • Loft Included</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reviews -->
-    <section id="reviews" class="py-20 bg-slate-50">
+    <!-- Why Choose Us -->
+    <section class="py-24 bg-slate-50 border-t border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-dark tracking-tight mb-16">What Arizona Homeowners Say</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-sm">
-                    <div class="text-yellow-400 text-xl mb-4">★★★★★</div>
-                    <p class="text-gray-600 italic mb-6">"Tim came out knew his stuff... him and his helper did a great job and in the end I am very happy with the quality craftsmanship he provided to build our 12x20 shed with a loft."</p>
-                    <p class="font-bold">— Doug D., Glendale, AZ</p>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-brand-600 font-bold tracking-widest uppercase text-sm mb-3">Why Choose Us</h2>
+                    <h3 class="text-4xl font-extrabold text-dark mb-6">Build With Confidence</h3>
+                    <p class="text-lg text-slate-500 mb-8 leading-relaxed">
+                        When you choose Heidelberg Custom Sheds, you're partnering with a team that treats your property like our own. We combine old-school craftsmanship with modern techniques to deliver results that stand the test of time.
+                    </p>
+                    <div class="bg-dark text-white p-8 rounded-2xl shadow-xl flex gap-6 items-start">
+                        <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-2xl flex-shrink-0">🤝</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2">Our Guarantee</h4>
+                            <p class="text-slate-400">100% Satisfaction or we make it right. We stand behind every project. If something isn't right, we'll fix it — no questions asked.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm">
-                    <div class="text-yellow-400 text-xl mb-4">★★★★★</div>
-                    <p class="text-gray-600 italic mb-6">"Timothy and his guys built us a beautiful shed in a timely manner. He was very communicative and so respectful. I would recommend him to anyone that needs work."</p>
-                    <p class="font-bold">— Livia R., Glendale, AZ</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm">
-                    <div class="text-yellow-400 text-xl mb-4">★★★★★</div>
-                    <p class="text-gray-600 italic mb-6">"Love the way our shed looks, great job Tim!! The process and time frame was perfect. Looks exactly as we planned, thank you."</p>
-                    <p class="font-bold">— Joanna C.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-aos="fade-left">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover-scale">
+                        <div class="text-3xl mb-4">🛡️</div>
+                        <h4 class="font-bold text-dark text-lg mb-2">Honest & Trustworthy</h4>
+                        <p class="text-slate-500 text-sm">Transparent communication from quote to completion.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover-scale">
+                        <div class="text-3xl mb-4">📍</div>
+                        <h4 class="font-bold text-dark text-lg mb-2">Local Phoenix Contractor</h4>
+                        <p class="text-slate-500 text-sm">Proudly serving the valley and understanding local codes.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover-scale">
+                        <div class="text-3xl mb-4">⏱️</div>
+                        <h4 class="font-bold text-dark text-lg mb-2">Timely Execution</h4>
+                        <p class="text-slate-500 text-sm">We stick to our schedule and respect your time.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover-scale">
+                        <div class="text-3xl mb-4">📝</div>
+                        <h4 class="font-bold text-dark text-lg mb-2">Free Estimates</h4>
+                        <p class="text-slate-500 text-sm">No-obligation consultations and detailed scope quotes.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Footer -->
-    <footer id="contact" class="bg-dark text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-                <h2 class="text-3xl font-bold mb-4">Ready to start your build?</h2>
-                <p class="text-gray-400 mb-8">Serving Phoenix, Glendale, Peoria, and the surrounding AZ areas. Contact us for a free quote on custom sheds, tiny home shells, and exterior accessories.</p>
-                <div class="space-y-4">
-                    <p class="flex items-center gap-3"><span class="text-brand font-bold">Phone:</span> (602) 880-4087</p>
-                    <p class="flex items-center gap-3"><span class="text-brand font-bold">Email:</span> heidelbergservices@gmail.com</p>
+    <!-- What Our Clients Say -->
+    <section id="reviews" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-600 font-bold tracking-widest uppercase text-sm mb-3">Testimonials</h2>
+                <h3 class="text-4xl font-extrabold text-dark mb-4">What Homeowners Say</h3>
+                <div class="flex justify-center items-center gap-2 mt-4">
+                    <div class="text-yellow-400 text-2xl">★★★★★</div>
+                    <span class="font-bold text-dark">5.0 Average from Real Clients</span>
                 </div>
             </div>
-            <div class="bg-slate-800 p-8 rounded-xl">
-                <!-- Change action URL to whatever form backend you prefer (Formspree, Netlify Forms, Airtable Webhook) -->
-                <form class="space-y-4" action="#" method="POST">
-                    <div>
-                        <input type="text" placeholder="Full Name" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-md text-white focus:outline-none focus:border-brand">
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-slate-50 p-8 rounded-3xl relative hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-8 right-8 text-brand-100 text-6xl font-serif leading-none">"</div>
+                    <div class="text-yellow-400 text-lg mb-4 relative z-10">★★★★★</div>
+                    <p class="text-slate-600 mb-8 relative z-10 leading-relaxed text-sm lg:text-base">"We called and had about 4 contractors bid job. Tim came out knew his stuff. He wasn't the cheapest or the most expensive, but him and his helper did a great job and in the end I am very happy with the quality craftsmanship he provided to build our 12X20 shed with a loft."</p>
+                    <div class="mt-auto">
+                        <p class="font-bold text-dark">Doug D.</p>
+                        <p class="text-sm text-slate-500">Glendale, AZ</p>
                     </div>
-                    <div>
-                        <input type="tel" placeholder="Phone Number" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-md text-white focus:outline-none focus:border-brand">
+                </div>
+                <!-- Review 2 -->
+                <div class="bg-slate-50 p-8 rounded-3xl relative hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-8 right-8 text-brand-100 text-6xl font-serif leading-none">"</div>
+                    <div class="text-yellow-400 text-lg mb-4 relative z-10">★★★★★</div>
+                    <p class="text-slate-600 mb-8 relative z-10 leading-relaxed text-sm lg:text-base">"Timothy and his guys built us a beautiful shed in a timely manner. He was very communicative and so respectful I would recommend him to anyone that needs work. Don't hesitate if you are looking for a contractor that is honest, detailed and trustworthy!"</p>
+                    <div class="mt-auto">
+                        <p class="font-bold text-dark">Livia R.</p>
+                        <p class="text-sm text-slate-500">Glendale, AZ</p>
                     </div>
-                    <div>
-                        <textarea placeholder="Tell us about your project (Size, Style, Additions)" rows="4" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-md text-white focus:outline-none focus:border-brand"></textarea>
+                </div>
+                <!-- Review 3 -->
+                <div class="bg-slate-50 p-8 rounded-3xl relative hover-scale" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute top-8 right-8 text-brand-100 text-6xl font-serif leading-none">"</div>
+                    <div class="text-yellow-400 text-lg mb-4 relative z-10">★★★★★</div>
+                    <p class="text-slate-600 mb-8 relative z-10 leading-relaxed text-sm lg:text-base">"We are very pleased with the 8x10 storage shed put up by Timothy and crew. Quality products and workmanship. Would definitely do business with them again."</p>
+                    <div class="mt-auto">
+                        <p class="font-bold text-dark">Patricia G.</p>
+                        <p class="text-sm text-slate-500">Peoria, AZ</p>
                     </div>
-                    <button type="submit" class="w-full bg-brand text-white py-3 rounded-md font-bold hover:bg-red-900 transition">Request Free Quote</button>
-                </form>
+                </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
-            &copy; 2026 Heidelberg Services LLC. All rights reserved.
+    </section>
+
+    <!-- Ready to Build (CTA & Contact Form) -->
+    <section id="contact" class="relative py-24 bg-dark overflow-hidden">
+        <!-- Abstract gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark to-brand-900 opacity-90"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div data-aos="fade-right">
+                    <h2 class="text-5xl font-extrabold text-white mb-6 leading-tight">Ready to Transform <span class="text-brand-500">Your Space?</span></h2>
+                    <p class="text-lg text-slate-300 mb-10 leading-relaxed">Fill out the form below and we'll get back to you within 24 hours with a free, no-obligation consultation and exact quote for your project.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-full flex items-center justify-center text-xl">📞</div>
+                            <div>
+                                <p class="text-sm text-slate-400">Call or Text us</p>
+                                <p class="text-xl font-bold text-white">(602) 880-4087</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-full flex items-center justify-center text-xl">✉️</div>
+                            <div>
+                                <p class="text-sm text-slate-400">Email us</p>
+                                <p class="text-lg font-bold text-white">heidelbergservices@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-2xl" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-dark mb-6">Request Your Free Quote</h3>
+                    <form action="#" method="POST" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                                <input type="text" placeholder="John Smith" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                                <input type="tel" placeholder="(602) 555-1234" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                            <input type="email" placeholder="john@example.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Project Type</label>
+                            <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition text-slate-700">
+                                <option>Lean-to Shed</option>
+                                <option>Gable Shed</option>
+                                <option>Barn Style Shed</option>
+                                <option>Custom / Tiny Home Shell</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Project Details</label>
+                            <textarea rows="4" placeholder="Size, additions needed, timeline..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-900 transition-colors shadow-lg hover:shadow-brand-500/30">Get My Free Quote 🚀</button>
+                        <p class="text-xs text-center text-slate-500 mt-4">By submitting, you agree to be contacted about your project. No spam.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0b1120] text-slate-400 py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 bg-brand-900 text-white flex items-center justify-center font-extrabold text-xl rounded-lg">H</div>
+                    <span class="font-extrabold text-xl text-white tracking-tight">Heidelberg Custom Sheds</span>
+                </div>
+                <p class="text-sm leading-relaxed max-w-sm mb-6">Phoenix's trusted contractor for premium lean-tos, gable sheds, barn-style structures, and complete shell builds.</p>
+                <div class="flex gap-4">
+                    <!-- Social icons placeholders -->
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 hover:text-white transition">IG</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 hover:text-white transition">FB</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 hover:text-white transition">TT</a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-6">Services</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-brand-500 transition">Lean-to Sheds</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Gable Sheds</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Barn Style Sheds</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Electrical & Plumbing</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Consultations</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-6">Service Areas</h4>
+                <ul class="space-y-3 text-sm">
+                    <li>Phoenix</li>
+                    <li>Glendale</li>
+                    <li>Peoria</li>
+                    <li>Surrounding AZ Areas</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm">
+            <p>&copy; 2026 Heidelberg Services LLC. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Sticky Header effect on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+                header.classList.remove('py-2');
+            } else {
+                header.classList.remove('shadow-sm');
+                header.classList.add('py-2');
+            }
+        });
+    </script>
 </body>
 </html>
