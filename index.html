@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heidelberg Custom Sheds | Phoenix, AZ</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,128 +17,77 @@
         }
     </script>
     <style>
-        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #f1f5f9; }
         .marquee-container { display: flex; overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
-        .marquee-container::before, .marquee-container::after { content: ""; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2; }
-        .marquee-container::before { left: 0; background: linear-gradient(to right, white, transparent); }
-        .marquee-container::after { right: 0; background: linear-gradient(to left, white, transparent); }
-        .marquee-track { display: flex; gap: 2rem; animation: scroll 30s linear infinite; width: max-content; }
+        .marquee-container::before, .marquee-container::after { content: ""; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; pointer-events: none; }
+        .marquee-container::before { left: 0; background: linear-gradient(to right, #f8fafc, transparent); }
+        .marquee-container::after { right: 0; background: linear-gradient(to left, #f8fafc, transparent); }
+        
+        .marquee-track { display: flex; gap: 2rem; width: max-content; animation: scrollLeft 40s linear infinite; }
         .marquee-track:hover { animation-play-state: paused; }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 1rem)); } }
+        
         .hover-scale { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .hover-scale:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
 
-    <header class="fixed w-full top-0 z-50 glass border-b border-gray-100 transition-all duration-300">
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-24">
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-brand-900 text-white flex items-center justify-center font-extrabold text-2xl rounded-xl">H</div>
                 <div class="flex flex-col">
-                    <span id="site-title" class="font-extrabold text-xl text-dark leading-tight">Heidelberg</span>
+                    <span class="font-extrabold text-xl text-dark leading-tight">Heidelberg</span>
                     <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Custom Sheds</span>
                 </div>
             </div>
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#work" class="text-sm font-semibold text-slate-600 hover:text-brand-600">Our Work</a>
-                <a href="#pricing" class="text-sm font-semibold text-slate-600 hover:text-brand-600">Pricing</a>
-                <a href="#reviews" class="text-sm font-semibold text-slate-600 hover:text-brand-600">Reviews</a>
-                <a href="#contact" class="bg-dark text-white px-6 py-3 rounded-lg text-sm font-bold hover:bg-brand-900 transition">Contact Tim</a>
+                <a href="#work" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Our Work</a>
+                <a href="#pricing" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Pricing</a>
+                <a href="#reviews" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Reviews</a>
+                <a id="nav-phone" href="#contact" class="bg-dark text-white px-6 py-3 rounded-lg text-sm font-bold hover:bg-brand-900 transition">Contact Tim</a>
             </nav>
         </div>
     </header>
 
-    <section class="relative pt-40 pb-24 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 text-center" data-aos="zoom-in">
-            <div class="inline-block bg-brand-50 text-brand-900 font-bold px-4 py-2 rounded-full text-sm mb-6">🏆 Phoenix's Top Rated Contractor</div>
-            <h1 id="hero-title" class="text-5xl lg:text-7xl font-extrabold text-dark tracking-tight mb-6">Not Your Average <br><span class="text-brand-600">Shed Company.</span></h1>
-            <p id="hero-subtitle" class="text-xl text-slate-500 mb-10 max-w-2xl mx-auto">High-quality craftsmanship, exact pricing, and direct communication with the builder.</p>
+    <section class="relative pt-48 pb-32 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl lg:text-7xl font-extrabold text-dark tracking-tight mb-6">Not Your Average <br><span class="text-brand-600">Shed Company.</span></h1>
+            <p class="text-xl text-slate-500 mb-10 max-w-2xl mx-auto">High-quality craftsmanship, exact pricing, and direct communication with the builder.</p>
             <a href="#contact" class="inline-block bg-brand-900 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-dark transition shadow-lg">Call to Start Your Build</a>
         </div>
     </section>
 
-    <section id="work" class="py-16 bg-slate-50 border-y border-slate-200">
-        <div class="text-center mb-10"><h2 class="text-3xl font-extrabold text-dark">Recent Projects</h2></div>
+    <section id="work" class="py-20 bg-slate-50 border-y border-slate-200">
+        <div class="text-center mb-10"><h2 class="text-4xl font-extrabold text-dark">Recent Projects</h2></div>
         <div class="marquee-container">
             <div id="projects-track" class="marquee-track">
-                <div class="w-80 h-80 rounded-2xl overflow-hidden relative flex-shrink-0 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600" class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-4 bg-white/90 px-4 py-2 rounded-lg font-bold text-sm">Work Office Shed</div>
                 </div>
-                <div class="w-80 h-80 rounded-2xl overflow-hidden relative flex-shrink-0 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600" class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-4 bg-white/90 px-4 py-2 rounded-lg font-bold text-sm">12x20 Shed with Loft</div>
-                </div>
-                <div class="w-80 h-80 rounded-2xl overflow-hidden relative flex-shrink-0 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600" class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-4 bg-white/90 px-4 py-2 rounded-lg font-bold text-sm">Work Office Shed</div>
-                </div>
-                <div class="w-80 h-80 rounded-2xl overflow-hidden relative flex-shrink-0 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600" class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-4 bg-white/90 px-4 py-2 rounded-lg font-bold text-sm">12x20 Shed with Loft</div>
-                </div>
-            </div>
         </div>
     </section>
 
     <section id="pricing" class="py-24 bg-dark text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-16">
                 <h2 class="text-4xl font-extrabold mb-4">Transparent Pricing</h2>
-                <p class="text-lg text-slate-400">All base prices include 1 Door, 1 Window, and Shingles/Roll Roofing.</p>
+                <p class="text-lg text-slate-400">All base prices include standard finishes. Contact us for custom additions.</p>
             </div>
-            
             <div id="pricing-grid" class="grid lg:grid-cols-3 gap-8">
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-4">Lean-to Shed</h3>
-                    <p class="text-4xl font-extrabold text-brand-500 mb-6">$2,900+</p>
-                    <ul class="space-y-3 text-slate-300"><li>✔ Wooden or Concrete Foundation</li></ul>
                 </div>
-                <div class="bg-brand-900 rounded-2xl p-8 border border-brand-500" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Gable Shed</h3>
-                    <p class="text-4xl font-extrabold text-white mb-6">$3,150+</p>
-                    <ul class="space-y-3 text-brand-100"><li>✔ Classic versatile design</li></ul>
-                </div>
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700" data-aos="fade-up">
-                    <h3 class="text-2xl font-bold mb-4">Barn Style</h3>
-                    <p class="text-4xl font-extrabold text-brand-500 mb-6">$3,800+</p>
-                    <ul class="space-y-3 text-slate-300"><li>✔ Superior overhead storage</li></ul>
-                </div>
-            </div>
         </div>
     </section>
 
-    <section id="reviews" class="py-24 bg-white overflow-hidden">
-        <div class="text-center mb-12"><h2 class="text-3xl font-extrabold text-dark">What Arizona Homeowners Say</h2></div>
-        <div class="marquee-container bg-white">
+    <section id="reviews" class="py-24 bg-slate-50 overflow-hidden">
+        <div class="text-center mb-12"><h2 class="text-4xl font-extrabold text-dark">What Arizona Homeowners Say</h2></div>
+        <div class="marquee-container bg-slate-50">
             <div id="reviews-track" class="marquee-track" style="animation-direction: reverse;">
-                <div class="w-96 bg-slate-50 p-8 rounded-2xl border border-slate-100 flex-shrink-0 hover-scale">
-                    <div class="text-yellow-400 mb-4 text-xl">★★★★★</div>
-                    <p class="text-slate-600 mb-6 text-sm">"Tim came out knew his stuff... very happy with the quality craftsmanship."</p>
-                    <p class="font-bold text-dark">Doug D. - Glendale, AZ</p>
                 </div>
-                <div class="w-96 bg-slate-50 p-8 rounded-2xl border border-slate-100 flex-shrink-0 hover-scale">
-                    <div class="text-yellow-400 mb-4 text-xl">★★★★★</div>
-                    <p class="text-slate-600 mb-6 text-sm">"Built us a beautiful shed in a timely manner. He was very communicative and respectful."</p>
-                    <p class="font-bold text-dark">Livia R. - Glendale, AZ</p>
-                </div>
-                <div class="w-96 bg-slate-50 p-8 rounded-2xl border border-slate-100 flex-shrink-0 hover-scale">
-                    <div class="text-yellow-400 mb-4 text-xl">★★★★★</div>
-                    <p class="text-slate-600 mb-6 text-sm">"Tim came out knew his stuff... very happy with the quality craftsmanship."</p>
-                    <p class="font-bold text-dark">Doug D. - Glendale, AZ</p>
-                </div>
-                <div class="w-96 bg-slate-50 p-8 rounded-2xl border border-slate-100 flex-shrink-0 hover-scale">
-                    <div class="text-yellow-400 mb-4 text-xl">★★★★★</div>
-                    <p class="text-slate-600 mb-6 text-sm">"Built us a beautiful shed in a timely manner. He was very communicative and respectful."</p>
-                    <p class="font-bold text-dark">Livia R. - Glendale, AZ</p>
-                </div>
-            </div>
         </div>
     </section>
 
     <section id="contact" class="py-24 bg-brand-900 text-center text-white">
-        <div class="max-w-4xl mx-auto px-4" data-aos="zoom-in">
+        <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-4xl md:text-6xl font-extrabold mb-8">Let's Build Your Dream Shed.</h2>
             <p class="text-xl text-brand-100 mb-12">Talk directly to Tim to schedule your consultation or get a quote.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-6">
@@ -149,11 +97,9 @@
         </div>
     </section>
 
-    <footer class="bg-dark text-slate-400 py-10 border-t border-white/10 text-center relative">
+    <footer class="bg-dark text-slate-400 py-10 border-t border-white/10 text-center">
         <p>&copy; 2026 Heidelberg Services LLC. All rights reserved.</p>
-        <div class="mt-4">
-            <a href="admin.html" class="text-slate-700 hover:text-slate-400 text-xs transition">Admin Dashboard</a>
-        </div>
+        <div class="mt-4"><a href="admin.html" class="text-slate-600 hover:text-slate-300 text-sm transition">Admin Dashboard</a></div>
     </footer>
 
     <script>
@@ -173,57 +119,54 @@
             }
         }
 
-        async function loadData() {
-            // Fetch Settings
-            const settings = await fetchAirtable('Settings');
-            if(settings.length > 0) {
-                settings.forEach(setting => {
-                    const key = setting.fields.Key;
-                    const val = setting.fields.Value;
-                    if(key === 'hero_title' && val) document.getElementById('hero-title').innerText = val;
-                    if(key === 'hero_subtitle' && val) document.getElementById('hero-subtitle').innerText = val;
-                    if(key === 'phone' && val) {
-                        document.getElementById('phone-btn').href = `tel:${val}`;
-                        document.getElementById('phone-btn').innerHTML = `📞 ${val}`;
-                    }
-                    if(key === 'email' && val) document.getElementById('email-btn').href = `mailto:${val}`;
-                });
-            }
-
-            // Fetch Projects (Photos)
+        async function init() {
+            // Fetch Projects
             const photos = await fetchAirtable('Photos');
             if(photos.length > 0) {
                 let photosHTML = '';
-                // Duplicate for marquee effect
-                [...photos, ...photos].forEach(photo => {
-                    const imgUrl = photo.fields.Attachments ? photo.fields.Attachments[0].url : 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600';
+                // Clone array 4 times so the scrolling marquee NEVER has a blank space
+                const loopedPhotos = [...photos, ...photos, ...photos, ...photos];
+                loopedPhotos.forEach(photo => {
+                    const imgUrl = photo.fields.Attachments ? photo.fields.Attachments[0].url : '';
                     const name = photo.fields.Name || 'Custom Build';
-                    photosHTML += `
-                        <div class="w-80 h-80 rounded-2xl overflow-hidden relative flex-shrink-0 hover-scale">
-                            <img src="${imgUrl}" class="w-full h-full object-cover">
-                            <div class="absolute bottom-4 left-4 bg-white/90 px-4 py-2 rounded-lg font-bold text-sm">${name}</div>
-                        </div>`;
+                    if(imgUrl) {
+                        photosHTML += `
+                            <div class="w-[350px] h-[350px] rounded-2xl overflow-hidden relative flex-shrink-0 hover-scale shadow-sm">
+                                <img src="${imgUrl}" class="w-full h-full object-cover">
+                                <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-5 py-2.5 rounded-lg font-bold text-sm text-dark shadow-sm">${name}</div>
+                            </div>`;
+                    }
                 });
                 document.getElementById('projects-track').innerHTML = photosHTML;
+            } else {
+                document.getElementById('work').style.display = 'none'; // Hide section if empty
             }
 
             // Fetch Reviews
             const reviews = await fetchAirtable('Reviews');
             if(reviews.length > 0) {
                 let reviewsHTML = '';
-                [...reviews, ...reviews].forEach(review => {
+                // Clone array 4 times for infinite seamless loop
+                const loopedReviews = [...reviews, ...reviews, ...reviews, ...reviews];
+                loopedReviews.forEach(review => {
                     const name = review.fields['Customer Name'] || 'Client';
                     const text = review.fields['Review Text'] || '';
-                    const loc = review.fields['Location'] || 'AZ';
-                    const stars = '★'.repeat(review.fields['Stars'] || 5);
+                    const loc = review.fields['Location'] || 'Phoenix, AZ';
+                    const starsNum = parseInt(review.fields['Stars']) || 5;
+                    const stars = '★'.repeat(starsNum);
+                    
                     reviewsHTML += `
-                        <div class="w-96 bg-slate-50 p-8 rounded-2xl border border-slate-100 flex-shrink-0 hover-scale">
-                            <div class="text-yellow-400 mb-4 text-xl">${stars}</div>
-                            <p class="text-slate-600 mb-6 text-sm">"${text}"</p>
-                            <p class="font-bold text-dark">${name} - ${loc}</p>
+                        <div class="w-[400px] bg-white p-8 rounded-2xl border border-slate-100 flex-shrink-0 hover-scale shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="text-yellow-400 mb-4 text-xl tracking-widest">${stars}</div>
+                                <p class="text-slate-600 mb-6 text-sm leading-relaxed">"${text}"</p>
+                            </div>
+                            <p class="font-bold text-dark mt-auto">${name} <span class="text-slate-400 font-normal text-xs ml-2">${loc}</span></p>
                         </div>`;
                 });
                 document.getElementById('reviews-track').innerHTML = reviewsHTML;
+            } else {
+                document.getElementById('reviews').style.display = 'none';
             }
 
             // Fetch Pricing
@@ -233,22 +176,27 @@
                 pricing.forEach((price, index) => {
                     const style = price.fields.Style || 'Shed';
                     const noFound = price.fields['No Foundation'] || 'Custom';
-                    const popularClass = index === 1 ? 'bg-brand-900 border-brand-500 text-white shadow-xl transform lg:-translate-y-4' : 'bg-slate-800 border-slate-700 text-white';
+                    const size = price.fields.Size || '';
+                    
+                    // Make the middle one highlighted
+                    const bgClass = index === 1 ? 'bg-brand-900 border-brand-500 text-white transform lg:-translate-y-4 shadow-2xl' : 'bg-slate-800 border-slate-700 text-white';
                     const textClass = index === 1 ? 'text-white' : 'text-brand-500';
+                    
                     pricingHTML += `
-                        <div class="rounded-2xl p-8 border ${popularClass}">
-                            <h3 class="text-2xl font-bold mb-4 ${index===1?'text-white':''}">${style}</h3>
-                            <p class="text-4xl font-extrabold ${textClass} mb-6">$${noFound}+</p>
-                            <ul class="space-y-3"><li>✔ Custom size: ${price.fields.Size || 'Variable'}</li></ul>
+                        <div class="rounded-2xl p-10 border ${bgClass} flex flex-col hover-scale">
+                            <h3 class="text-2xl font-bold mb-2">${style}</h3>
+                            ${size ? `<p class="text-sm opacity-70 mb-4">Base Size: ${size}</p>` : ''}
+                            <p class="text-5xl font-extrabold ${textClass} mb-8">$${noFound}+</p>
+                            <a href="#contact" class="mt-auto block w-full py-4 rounded-xl text-center font-bold transition ${index === 1 ? 'bg-white text-brand-900 hover:bg-slate-100' : 'bg-slate-700 hover:bg-slate-600'}">Get Quote</a>
                         </div>`;
                 });
                 document.getElementById('pricing-grid').innerHTML = pricingHTML;
+            } else {
+                document.getElementById('pricing').style.display = 'none';
             }
         }
 
-        window.onload = loadData;
+        window.onload = init;
     </script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ once: true, offset: 50, duration: 800 });</script>
 </body>
 </html>
